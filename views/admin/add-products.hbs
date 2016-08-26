@@ -1,0 +1,64 @@
+<div class="container">
+   <h3 style="color: orangered"> {{ title }} </h3>
+    <form action="../admin/add-product" method="post" enctype="multipart/form-data" name="productForm">
+        <div class="row">
+
+            <div class="form-group col-md-3">
+                Title
+                <input type="text" required class="form-control" name="title">
+            </div>
+            <div class="form-group col-md-3">
+                Category
+                <select name="category" required class="form-control">
+                    <option>select category</option>
+                    <option>Men</option>
+                    <option>Women</option>
+                    <option>Kids</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                Color
+                <select name="color" required class="form-control">
+                    <option>select color</option>
+                    <option>Black</option>
+                    <option>Blue</option>
+                    <option>Brown</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="form-group col-md-3">
+                Price
+                <input type="number" required class="form-control" name="price">
+            </div>
+
+            <div class="form-group col-md-3">
+                Quantity
+                <input type="number" required class="form-control" name="quantity">
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    Product photo
+                    <input type="file" class="form-control" name="image">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-md" style="background-color: orangered; color: white" value="submit product" name="submit">
+        </div>
+
+            <div class="col-md-6">
+                <h3 style="color: orangered;"> {{ savedMessage }}</h3>
+            </div>
+        </div>
+
+            <br><br><br>
+
+    </form>
+</div>

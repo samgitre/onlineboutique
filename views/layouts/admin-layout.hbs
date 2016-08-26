@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/bootstrap.css' />
+    <script src="/js/bootstrap.js" rel="script"></script>
+    {{> scripts }}
+</head>
+<body>
+<div class="container">
+    {{> navbar }}
+
+        <div class="row">
+            <h3> <a href="/admin/admin-home"  style="color: orangered;">Admin dashboard </a> </h3>
+
+            <div class="col-md-2 pull-left">
+                {{> admin-sidebar }}
+            </div>
+            <div class="col-md-10">
+
+            {{{body}}}
+
+            </div>
+
+        </div>
+</div>
+{{> footer }}
+
+</body>
+</html>

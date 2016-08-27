@@ -7,12 +7,14 @@ var multiparty = require('multiparty');
 var form = new multiparty.Form();
 
 
-/* GET users listing. */
-router.post('/cart', function(req, res, next) {
+
+/* Shopping cart */
+router.get('/cart-items', function(req, res, next) {
     res.render('cart/cart-items', {title : 'Shopping cart'});
 });
 
-
-router.post('/add-to-cart', function(req, res, next) {
+router.get('/add-to-cart', function(req, res, next) {
     res.render('cart/add-to-cart', {title : 'add item to cart'});
 });
+
+module.exports= router;

@@ -1,36 +1,57 @@
 <div class="container">
 
     <div class="row">
-        <form action="">
 
-        <div class="col-md-3"><select class="form-control" name="color">
-            <option>blue</option>
-            <option>black</option>
-            <option>white</option>
-            <option>pink</option>
-            <option>brown</option>
+        <div class="col-md-4">
+            <img src="#" class="-align-center">
+        </div>
 
-        </select></div>
-        <div class="col-md-3"><select class="form-control" name="size">
-            <option>select size</option>
-            <option>small</option>
-            <option>medium</option>
-            <option>Large</option>
-            <option>x-Large</option>
-            <option>xx-Large</option>
-
-        </select> </div>
-        <div class="col-md-3"><input type="number" class="form-control" name="quantity">
-
-        </input> </div>
-        </form>
-        <hr>
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-4"></div>
         <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 style="color: orangered"> Product title</h4>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 style="color: orangered">Price</h4>
+                </div>
+            </div>
+
+                <form action="" method="post">
+                    <div class="row">
+
+                    <div class="col-md-3"><select class="form-control" name="color">
+                        <option>color</option>
+                        <option>blue</option>
+                        <option>black</option>
+                        <option>white</option>
+                        <option>pink</option>
+                        <option>brown</option>
+
+                    </select></div>
+                    <div class="col-md-3"><select class="form-control" name="size">
+                        <option> size</option>
+                        <option>small</option>
+                        <option>medium</option>
+                        <option>Large</option>
+                        <option>x-Large</option>
+                        <option>xx-Large</option>
+
+                    </select> </div>
+                    <div class="col-md-2"><input type="number" class="form-control" name="quantity"/>
+                    </div>
+                    </div><br>
+                    <div class="row col-md-offset-1">
+                        <input type="submit" value="Add to cart" class="btn btn-md"
+                               style="background-color: orangered; color: white">
+                    </div>
+                    <div class="home-product-bottom">
+                        <h4><a href="/cart/cart-items">Add to cart</a></h4>
+                    </div>
+
+                </form>
+            </div>
 
         </div>
     </div>

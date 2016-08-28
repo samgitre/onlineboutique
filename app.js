@@ -12,7 +12,6 @@ var flash = require('connect-flash');
 var bcrypt = require('bcrypt-nodejs');
 
 
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
@@ -60,9 +59,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Some Global variables
-
 app.use(function (req,res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');

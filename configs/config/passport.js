@@ -19,6 +19,7 @@ passport.use('local-sign-up',  new LocalStrategy({
     usernameField : 'email',
     passwordField : 'password',
     passReqToCallback : true
+
 },function (req, fname,lname, email, password, done) {
         User.findOne({'email' : email}, function (err, user) {
             if(err){

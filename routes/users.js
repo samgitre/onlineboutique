@@ -5,7 +5,7 @@ var csrf = require('csurf');
 var passport = require('passport');
 var csurfProtection = csrf();
 var bcrypt = require('bcrypt-nodejs');
-// router.use(csurfProtection);
+ router.use(csurfProtection);
 
 
 /* GET users listing. */
@@ -16,66 +16,21 @@ router.get('/all-clients', function(req, res) {
 
 router.get('/sign-up', function(req, res, next) {
 
-    res.render('users/sign-up', {title : 'Users account'});
+    res.render('users/sign-up', {title : 'Users account', csurfToken : req.csrfToken()});
 });
 
 
 router.get('/login', function(req, res) {
 
-    res.render('users/login', {title : 'Users account'});
+    res.render('users/login', {title : 'Login'});
 });
 
 
-router.post('/createUser',function (req, res, next) {
-
-    var user = new User({
-
-    })
-
-
-
-
-
-    // var firstName = req.body.firstName;
-    // var lastName =req.body.lastName;
-    //  var email = req.body.email;
-    //  var password = req.body.password;
-    //
-    // req.checkBody('firstName', 'first name is required').notEmpty();
-    // req.checkBody('lastName', 'last name is required').notEmpty();
-    // req.checkBody('email', 'Invalid email').isEmail();
-    // req.checkBody('password', 'password name is required').notEmpty();
-    //
-    //
-    // var errors = req.validationErrors();
-    //
-    // if(errors){
-    //     res.render('users/sign-up', {errors : errors});
-    // }
-    // else {
-    //      var newUser = User({
-    //          firstName : firstName,
-    //          lastName : lastName,
-    //          email: email,
-    //          password : password
-    //      });
-    //
-    //        User.createUser(newUser, function (err, user) {
-    //         if(err){
-    //             throw  err;
-    //             console.log(user);
-    //         }
-    //         else {
-    //             res.flash('success_msg', ' You have been registered successfully. Please log in to manage your profile');
-    //             res.redirect('users/login');
-    //
-    //         }
-    //
-    //     })
-    //
-    // }
-});
-
+router.post('/createUser', passport.authenticate('local-sign-up', {
+    successRedirect : '/user-profile',
+    failureRedirect : '/sign-up',
+    failureFlash : true
+}));
 
 router.get('/user-profile', function (req, res) {
     res.render('users/user-profile');

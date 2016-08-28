@@ -34,6 +34,8 @@ router.get('/add-products', function(req, res, next) {
     res.render('admin/add-products', {title : 'Add New Products', layout: 'admin-layout'});
 });
 
+
+
 router.post('/add-product', function (req, res, next) {
 
     try {
@@ -70,6 +72,7 @@ router.post('/add-product', function (req, res, next) {
         res.send(e.message);
     }
 });
+
 
 router.get('/product/:id', function (req, res) {
     products.findById(req.params.id, function (err, product) {

@@ -12,20 +12,55 @@
   <body>
 
           {{> navbar }}
+
   <div class="container">
       <h3 style="color: orangered"> {{ title }}</h3>
 
+<!--displaying messages to the users using the connect flash module-->
+
+      <div class="row col-md-offset-2">
+          {{# if success_msg}}
+              <div class="row col-md-offset-1">
+                  <div class="alert alert-success col-md-6"> {{ success_msg }}</div>
+              </div>
+
+          {{/if}}
+
+          {{# if error_msg}}
+              <div class="row col-md-offset-1">
+                  <div class="alert alert-danger col-md-6"> {{ error_msg }}</div>
+              </div>
+          {{/if}}
+
+          {{# if error}}
+              <div class="row col-md-offset-1">
+                  <div class="alert alert-danger col-md-6"> {{ error }}</div>
+              </div>
+
+          {{/if}}
+
+      </div>
+      <!--end display message to users-->
+
+
           <div class="row">
+
+
               <div class="col-md-2 pull-left">
+                  <!--injecting the navigation menu bar as partial-->
                   {{> sidebar }}
               </div>
 
               <div class="col-md-8">
+
+                  <!--injecting pages into the main template body-->
               {{{body}}}
 
               </div>
           </div>
       </div>
+
+          <!--injecting the footer as partial-->
 {{> footer }}
   </body>
 </html>

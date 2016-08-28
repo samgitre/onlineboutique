@@ -1,5 +1,16 @@
 <div class="container">
 
+        {{#if errors}}
+
+            {{#each errors}}
+            <div class="row col-md-offset-2">
+                <div class="alert alert-danger col-md-4"> {{ msg }}</div>
+            </div>
+            {{/each}}
+
+        {{/if}}
+
+
     <form action="../users/createUser" method="post">
         <div class="row col-lg-offset-2">
             <h3 style="color: orangered"> Sign up for new account </h3>
@@ -32,7 +43,7 @@
                 <input type="password" class="form-control" name="password">
             </div>
             </div>
-            <input type="hidden" name="_csrf" value="{{ csurfToken }}">
+
             <div class="row">
 
             <div class="col-md-2">
@@ -45,5 +56,5 @@
         <br><br><br>
 
     </form>
-    {{ csurfToken }}
+
 </div>

@@ -1,11 +1,12 @@
 var express = require('express');
-
+var path = require('path');
 var router = express.Router();
 var products = require('../configs/model/products-schema');
 var multer = require('multer');
 var fs = require('fs');
 var multiparty = require('multiparty');
 var form = new multiparty.Form();
+
 
 
 /* GET users listing. */
@@ -35,13 +36,30 @@ router.get('/add-products', function(req, res, next) {
 });
 
 
-
 router.post('/add-product', function (req, res, next) {
+
+    // var product = new products();
+    // product.productImage.data = fs.readFileSync(req.files.image.path);
+    // product.productImage.contentType = 'image/jpg';
+    //
+    // product.title = req.body.title;
+    // product.category = req.body.category;
+    // product.color = req.body.color;
+    // product.price = req.body.price;
+    // product.quantity = req.body.quantity;
+    //
+    // product.save(function (err) {
+    //     if(err){
+    //         return res.status(500).send()
+    //     }
+    //     return res.status(200).send('product added successfully');
+    //
+    // });
 
     try {
         form.parse(req, function (err, fields, files) {
-         var   img = files.image[0];
-          var  imagePath = './public/images/' + img.originalFilename;
+            var   img = files.image[0];
+            var  imagePath = './public/images/' + img.originalFilename;
             fs.readFile(img.path, function (err, data) {
                 fs.writeFile(imagePath, data, function (err) {
                     if (err) {

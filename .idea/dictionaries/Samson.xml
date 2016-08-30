@@ -4,8 +4,10 @@
       <w>bcrypt</w>
       <w>csrf</w>
       <w>csurf</w>
+      <w>fieldname</w>
       <w>fname</w>
       <w>lname</w>
+      <w>resave</w>
     </words>
   </dictionary>
 </component>

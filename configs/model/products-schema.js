@@ -27,8 +27,8 @@ var product = new Schema({
          required : true
     },
     productImage :{
-        type :String,
-        required :true
+        type : String,
+        required : true
     }
 });
 

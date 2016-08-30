@@ -14,33 +14,27 @@ passport.deserializeUser(function (id, done) {
 });
 
 passport.use('local-sign-up',  new LocalStrategy({
-    firstNameField: 'fname',
-    lastNameField : 'lname',
     usernameField : 'email',
     passwordField : 'password',
     passReqToCallback : true
 
-},function (req, fname,lname, email, password, done) {
+},
+    function (req, email, password, done) {
         User.findOne({'email' : email}, function (err, user) {
             if(err){
                 return done(err);
             }
-            if(user){
+             if(user){
                 return done(null, false,{message: 'This email is already in use.'});
             }
+
                 var newUser = new User();
-                newUser.fname = fname;
-                newUser.lname = lname;
                 newUser.email = email;
                 newUser.password = newUser.encryptPassword(password);
 
-            newUser.save(function (err, result) {
-                if(err){
-                    done(err);
-                }
-                else {
-                    done(null, newUser);
-                }
+                newUser.save(function (err, result) {
+                if(err){ done(err);}
+                else { done(null, newUser);}
             });
         });
     }

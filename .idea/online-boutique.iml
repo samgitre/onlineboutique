@@ -17,5 +17,8 @@
     <orderEntry type="library" name="validator-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="bcrypt-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="connect-flash-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="node-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="body-parser-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="npm-DefinitelyTyped" level="application" />
   </component>
 </module>

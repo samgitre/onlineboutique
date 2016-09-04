@@ -8,34 +8,68 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    User.fineById(id, function (err, user) {
+    User.getUserById(id, function (err, user) {
         done(err, user);
     });
 });
 
-passport.use('local-sign-up',  new LocalStrategy({
-    usernameField : 'email',
-    passwordField : 'password',
-    passReqToCallback : true
-
-},
-    function (req, email, password, done) {
-        User.findOne({'email' : email}, function (err, user) {
-            if(err){
+passport.use('local', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password'
+       },
+    function(email, password, done) {
+           User.authenticate(email, password, function(err, user) {
+            if (err) {
                 return done(err);
             }
-             if(user){
-                return done(null, false,{message: 'This email is already in use.'});
+
+            if (!user) {
+                return done(null, false, { message: 'Invalid email or password.' });
+            }
+            User.comparePassword(password, user.password, function (err, isMatch) {
+            if(err) throw err;
+            if(isMatch){
+                return done(null, user);
+            }else {
+                return done(null, false, 'Invalid  user email or password');
             }
 
-                var newUser = new User();
-                newUser.email = email;
-                newUser.password = newUser.encryptPassword(password);
-
-                newUser.save(function (err, result) {
-                if(err){ done(err);}
-                else { done(null, newUser);}
-            });
+        });
+               return done(null, user);
         });
     }
 ));
+
+
+
+
+
+
+
+
+
+
+//passport.use('local',new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'password'
+// },function (email, password, done) {
+//
+//     User.getUserByEmail(email, function (err, user) {
+//         if(err) throw err;
+//         if(!user) {
+//             return done(null, false, {message: 'Invalid  user email or password'});
+//         }
+//         User.comparePassword(password, user.password, function (err, isMatch) {
+//             if(err) throw err;
+//             if(isMatch){
+//                 return done(null, user);
+//             }else {
+//                 return done(null, false, 'Invalid  user email or password');
+//             }
+//
+//         });
+//     });
+//
+// }));
+//
+

@@ -5,7 +5,9 @@
       <w>csrf</w>
       <w>csurf</w>
       <w>fieldname</w>
+      <w>firstname</w>
       <w>fname</w>
+      <w>lastname</w>
       <w>lname</w>
       <w>resave</w>
     </words>

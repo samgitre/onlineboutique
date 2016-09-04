@@ -10,7 +10,7 @@ var form = new multiparty.Form();
 
 
 /* GET users listing. */
-router.post('/admin-login', function(req, res, next) {
+router.post('/admin-home', function(req, res, next) {
     res.render('admin/admin-home', {title : 'Admin Dashboard', layout: 'admin-layout'});
 });
 

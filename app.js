@@ -16,14 +16,22 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var cart = require('./routes/cart');
+var payment = require('./routes/payment');
+
+
 
 
 var app = express();
 require('./configs/config/db');
-require('./configs/config/passport');
+ require('./configs/config/passport');
 
 
-app.engine('hbs', hbs({extname : 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/',partialsDir: __dirname + '/views/partials/'}));
+
+app.engine('hbs', hbs({extname : 'hbs', defaultLayout: 'layout',
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials/'}));
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -66,12 +74,11 @@ app.use(function (req,res, next) {
   next();
 });
 
-
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 app.use('/cart', cart);
-
+app.use('/pay', payment);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

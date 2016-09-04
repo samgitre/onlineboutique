@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{bcrypt-DefinitelyTyped, connect-flash-DefinitelyTyped, express-validator-DefinitelyTyped, handlebars-DefinitelyTyped, mongodb-DefinitelyTyped, mongoose-DefinitelyTyped, multer-DefinitelyTyped, passport-DefinitelyTyped, validator-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{bcrypt-DefinitelyTyped, body-parser-DefinitelyTyped, connect-flash-DefinitelyTyped, express-validator-DefinitelyTyped, handlebars-DefinitelyTyped, mongodb-DefinitelyTyped, mongoose-DefinitelyTyped, multer-DefinitelyTyped, node-DefinitelyTyped, npm-DefinitelyTyped, passport-DefinitelyTyped, validator-DefinitelyTyped}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>

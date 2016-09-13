@@ -4,21 +4,18 @@ var products = require('../configs/model/products-schema');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
+  products.find(function (err,docs) {
+    var productChunk = [];
+    var chunkSize = 3;
 
-try {
-  products.find({}, function (err, docs) {
-    if (typeof products === "undefined") {
-      res.status(404).send('Product collection does not exist');
-      return;
+    for(var i =0; i <docs.length; i+= chunkSize){
+      productChunk.push(docs.slice(i,i + chunkSize));
     }
-    var product = docs;
-    res.render('./shop/index', {title: 'Online Boutique', products: product});
+    res.render('shop/index', {products : productChunk, title: 'Online Boutique'});
   });
-}
-catch (e){
-  document.write(e.message);
-}
 });
+
+
 
 module.exports = router;

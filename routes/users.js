@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../configs/model/user-schema');
+var auth = require('../configs/config/authentication');
 
 
 /* GET clients listing. */
 router.get('/all-clients', function(req, res) {
-  res.render('users/all-clients', {title : 'Clients Information', layout: 'admin-layout'});
+  res.render('users/all-clients', {title : 'Clients Information',
+      layout: 'admin-layout'});
 });
 
 //Getting the sign up page
@@ -37,7 +39,6 @@ router.post('/createUser',  function (req, res) {
             lastname: lastname,
             username: username,
             password: password
-
         });
     }
     User.createUser(user, function (err, user) {
@@ -50,7 +51,6 @@ router.post('/createUser',  function (req, res) {
     res.redirect('login');
 });
 
-
 // Getting the login page
 router.get('/login', function(req, res) {
 
@@ -58,22 +58,28 @@ router.get('/login', function(req, res) {
 });
 
 
-
-// // Authenticate and Logging in the user with the passport module
+// Authenticate and Logging in the user with the passport module
 router.post('/loginUser', passport.authenticate('local',
     {
         successRedirect: 'user-profile',
         failureRedirect: 'login',
         failureFlash : true
     }), function(req, res) {
+        // console.log(user)
 
-
-        res.redirect('user-profile');
 });
 
-router.get('/user-profile', function (req, res) {
 
-    res.render('users/user-profile');
+router.get('/user-profile', auth.ensureAuthentication,function (req, res) {
+
+        res.render('users/user-profile');
+});
+
+
+router.get('/logout', function (req, res) {
+    req.logout();
+    req.flash('success_msg', 'You have been logged out');
+    res.redirect('/');
 });
 
 module.exports = router;

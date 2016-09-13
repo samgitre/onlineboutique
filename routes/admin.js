@@ -1,11 +1,13 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
-var products = require('../configs/model/products-schema');
 var multer = require('multer');
 var fs = require('fs');
 var multiparty = require('multiparty');
 var form = new multiparty.Form();
+
+var products = require('../configs/model/products-schema');
+var Admin = require('../configs/model/admin-schema');
 
 
 
@@ -25,10 +27,54 @@ router.get('/admin-user', function(req, res, next) {
 });
 
 
+router.post('/admin-user', function(req, res, next) {
+
+       var setAdmin = req.body.setAdmin;
+        var check = req.body.isAdmin;
+        if(check.checked){
+            setAdmin = true;
+        }
+
+    var firstname = req.body.firstName;
+    var lastname = req.body.lastName;
+    var username = req.body.email;
+    var password = req.body.password;
+    var admin = setAdmin;
+
+    req.checkBody('firstname', 'firstname is missing').notEmpty();
+    req.checkBody('lastname', 'lastname is missing').notEmpty();
+    req.checkBody('email', 'enter your email').notEmpty().withMessage('Invalid email address').isEmail();
+    req.checkBody('password', 'password is missing').notEmpty();
+
+    var showErrors = req.validationErrors();
+    if(showErrors) {
+        res.render('admin/admin-user', {errors: showErrors});
+    }
+    else {
+        var adminUser = new Admin({
+            firstname: firstname,
+            lastname: lastname,
+            username: username,
+            password: password,
+            isAdmin : admin
+        });
+    }
+    Admin.createUser(adminUser, function (err, user) {
+
+        if(err) throw err;
+        console.log(user);
+    });
+
+    req.flash('success_msg', 'Account created successfully');
+    res.redirect('admin-login');
+});
+
+
 /* GET add products page */
 router.get('/all-products', function(req, res, next) {
     res.render('admin/all-products', {title : 'Manage Products', layout: 'admin-layout'});
 });
+
 
 
 router.get('/add-products', function(req, res, next) {
@@ -38,28 +84,11 @@ router.get('/add-products', function(req, res, next) {
 
 router.post('/add-product', function (req, res, next) {
 
-    // var product = new products();
-    // product.productImage.data = fs.readFileSync(req.files.image.path);
-    // product.productImage.contentType = 'image/jpg';
-    //
-    // product.title = req.body.title;
-    // product.category = req.body.category;
-    // product.color = req.body.color;
-    // product.price = req.body.price;
-    // product.quantity = req.body.quantity;
-    //
-    // product.save(function (err) {
-    //     if(err){
-    //         return res.status(500).send()
-    //     }
-    //     return res.status(200).send('product added successfully');
-    //
-    // });
-
     try {
         form.parse(req, function (err, fields, files) {
             var   img = files.image[0];
             var  imagePath = './public/images/' + img.originalFilename;
+            var  imageUrl = 'images/' + img.originalFilename;
             fs.readFile(img.path, function (err, data) {
                 fs.writeFile(imagePath, data, function (err) {
                     if (err) {
@@ -74,7 +103,7 @@ router.post('/add-product', function (req, res, next) {
                 color: fields.color,
                 price: fields.price,
                 quantity: fields.quantity,
-                productImage: imagePath
+                productImage: imageUrl
             });
             product.save(function (err) {
                 if (err) {

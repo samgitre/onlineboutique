@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -13,3 +13,48 @@ a {
      color: #ffffff;
      font-size: 14px;
  }
+
+ .new-foot{
+     background-color: #9F7F8A;;
+     height: 10px;
+ }
+
+ .special{
+     background-color: #9F7F8A;;
+     color: #a94442;
+ }
+
+ nav >li{
+     color: #a94442;
+ }
+ .list-group-class{
+     background-color: darkgrey;
+ }
+
+ .btn-orange{
+     background-color: #9F7F8A;;
+     color: #ffffff;
+ }
+
+.list-group-item-danger-side {
+    font-size: 20px;
+    background-color: #3B3F40;
+}
+
+.menu{
+    font-family: 'Tangerine', serif;
+    font-size: 48px;
+    text-shadow: 6px 6px 4px #aaa;
+    text-decoration:underline;
+
+}
+
+.class-phone{
+    font-family: 'Tangerine', serif;
+    font-size: 36px;
+    text-shadow: 10px 4px 4px #aaa;
+}
+
+.titles{
+    color:#9F7F8A;
+}

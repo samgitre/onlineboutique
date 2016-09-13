@@ -11,13 +11,9 @@
   </head>
   <body>
 
-          {{> navbar }}
-
   <div class="container">
-      <h3 style="color: orangered"> {{ title }}</h3>
-
+      {{> navbar }}
 <!--displaying messages to the users using the connect flash module-->
-
       <div class="row col-md-offset-2">
           {{# if success_msg}}
               <div class="row col-md-offset-1">
@@ -45,13 +41,13 @@
 
           <div class="row">
 
-
               <div class="col-md-2 pull-left">
+
                   <!--injecting the navigation menu bar as partial-->
                   {{> sidebar }}
               </div>
 
-              <div class="col-md-8">
+              <div class="col-md-8 col-md-offset-1">
 
                   <!--injecting pages into the main template body-->
               {{{body}}}

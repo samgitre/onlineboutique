@@ -1,13 +1,13 @@
-<div class="container">
-   <h3 style="color: orangered"> {{ title }} </h3>
+
+   <h3 class="titles"> {{ title }} </h3>
     <form action="../admin/add-product" method="post" enctype="multipart/form-data" name="productForm">
         <div class="row">
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-5">
                 Title
                 <input type="text" required class="form-control" name="title">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-5">
                 Category
                 <select name="category" required class="form-control">
                     <option>select category</option>
@@ -16,8 +16,9 @@
                     <option>Kids</option>
                 </select>
             </div>
-
-            <div class="form-group col-md-3">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
                 Color
                 <select name="color" required class="form-control">
                     <option>select color</option>
@@ -26,22 +27,22 @@
                     <option>Brown</option>
                 </select>
             </div>
-        </div>
 
-        <div class="row">
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-5">
                 Price
                 <input type="number" required class="form-control" name="price">
             </div>
+            </div>
 
-            <div class="form-group col-md-3">
+        <div class="row">
+            <div class="form-group col-md-5">
                 Quantity
                 <input type="number" required class="form-control" name="quantity">
             </div>
 
             <div class="form-group">
-                <div class="col-md-3">
+                <div class="col-md-5">
                     Product photo
                     <input type="file" class="form-control" name="image">
                 </div>
@@ -49,8 +50,8 @@
             </div>
         </div>
         <div class="row">
-        <div class="col-md-3">
-            <input type="submit" class="btn btn-md" style="background-color: orangered; color: white" value="submit product" name="submit">
+        <div class="col-md-4">
+            <input type="submit" class="btn btn-md btn-orange" value="submit product" name="submit">
         </div>
 
         </div>
@@ -58,4 +59,3 @@
             <br><br><br>
 
     </form>
-</div>

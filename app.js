@@ -10,7 +10,8 @@ var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
 var bcrypt = require('bcrypt-nodejs');
-
+var mongoose = require('mongoose');
+var mongooseStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -19,22 +20,18 @@ var cart = require('./routes/cart');
 var payment = require('./routes/payment');
 
 
-
-
 var app = express();
-require('./configs/config/db');
+ require('./configs/config/db');
  require('./configs/config/passport');
-
-
 
 app.engine('hbs', hbs({extname : 'hbs', defaultLayout: 'layout',
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/'}));
 
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+app.use(express.static(__dirname + '/public/'));
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -42,14 +39,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret : 'anything', resave: false, saveUninitialized: false}));
+app.use(session({secret : 'anything',
+    resave: false,
+    saveUninitialized: false,
+    store : new mongooseStore({mongooseConnection: mongoose.connection}),
+    cookies : {maxAge : 60 * 60 * 1000}
+}));
+
 
 //Express Validator
-app.use(validator({
-  errorFormatter: function(param, msg, value) {
-    var namespace = param.split('.')
-        , root    = namespace.shift()
-        , formParam = root;
+app.use(validator({ errorFormatter: function(param, msg, value) {
+    var namespace = param.split('.') ,
+        root  = namespace.shift(),
+        formParam = root;
     while(namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
@@ -61,18 +63,27 @@ app.use(validator({
   }
 }));
 
+
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Some Global variables
 app.use(function (req,res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  res.locals.session = req.session;
+  res.locals.user = req.user || null;
+
+
+
   next();
 });
+
 
 app.use('/', routes);
 app.use('/users', users);
@@ -80,11 +91,13 @@ app.use('/admin', admin);
 app.use('/cart', cart);
 app.use('/pay', payment);
 
+
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
 
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
@@ -96,6 +109,7 @@ if (app.get('env') === 'development') {
   });
 }
 
+
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -103,5 +117,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 module.exports = app;

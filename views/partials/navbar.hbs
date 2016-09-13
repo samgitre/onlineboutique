@@ -1,4 +1,11 @@
-<nav class="navbar" style="background-color: chocolate">
+<div class="container">
+<div class="row">
+    <div class="col-md-4 menu"> {{ title }}</div>
+    <div class="col-md-3 col-md-offset-1">
+        <span class="fa fa-phone class-phone"> +01-111-222- 3333. No. 225, Yaba Express Way, Lagos -Nigeria.</span></div>
+</div>
+</div>
+<nav class="navbar special">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -6,7 +13,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: #ffffff">Online Boutique</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -28,20 +34,23 @@
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/cart/cart-items" ><span class="glyphicon glyphicon-shopping-cart"></span> </a></li>
+            <li><a href="/cart/cart-items" ><span class="glyphicon glyphicon-shopping-cart"></span> </a></li>
 
-                <ul class="nav navbar-nav">
 
-                    <li class="dropdown"><a class="dropdown-toggle  glyphicon glyphicon-user" data-toggle="dropdown" href="#"> Users Management  <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/users/sign-up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                            <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                            <li><a href="/admin/admin-login"><span class="glyphicon glyphicon-lock"></span> Admin </a></li>
-                            <li><a href="/pay/payment"><span class="glyphicon glyphicon-lock"></span> check out </a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </ul>
+              <ul class="nav navbar-nav">
+                  <li class="dropdown"><a class="dropdown-toggle  glyphicon glyphicon-user" data-toggle="dropdown" href="#"> Account Management <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+            {{#if user}}
+                          <li><a href="/users/user-profile"><span class="glyphicon glyphicon-user"></span> User account</a></li>
+                          <li><a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            {{else}}
+                          <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                          <li><a href="/users/sign-up"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+                          <li><a href="/admin/admin-login"><span class="glyphicon glyphicon-lock"></span> Admin </a></li>
+            {{/if}}
+                      </ul>
+                      </ul>
+              </ul>
         </div>
     </div>
 </nav>

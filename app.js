@@ -31,6 +31,7 @@ app.engine('hbs', hbs({extname : 'hbs', defaultLayout: 'layout',
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+
 app.use(express.static(__dirname + '/public/'));
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -79,8 +80,6 @@ app.use(function (req,res, next) {
   res.locals.session = req.session;
   res.locals.user = req.user || null;
 
-
-
   next();
 });
 
@@ -108,6 +107,7 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
 
 
 app.use(function(err, req, res, next) {

@@ -1,37 +1,57 @@
 
+<div class="row">
+    <div class="col-md-4"><h3>Shopping cart items</h3></div>
+</div>
+<div class="clear"></div>
 
-   <div class="row">
-    <div class="row" style="background-color: lightgray; border-radius: 10px 10px 0px 0px">
-        <div class="col-md-4"> <h4> Products</h4></div>
-        <div class="col-md-2"> <h4> Color</h4></div>
-        <div class="col-md-2"> <h4> Size</h4></div>
-        <div class="col-md-2"> <h4> Quantity</h4></div>
-        <div class="col-md-2"> <h4> Price</h4></div>
+{{#if items }}
+    <div class="row list-group">
+
+        {{#each items }}
+            <ul class="list-group">
+            <li class="list-group-item">
+                <span>
+                    <img src="{{this.item.productImage}}" class="img-thumbnail img-responsive" style="width: 80px; height: 80px">
+                   {{ this.item.title }}
+                </span>
+
+                <span class="col-md-offset-1">{{ this.qty }} </span>
+
+                <span class="col-md-offset-1">{{ this.item.price }}</span>
+
+                <span class="btn-group pull-right col-md-1">
+                    <button type="button" class="btn btn-xs"><a href="./reduceItems/ {{ this.item._id }}" class="fa fa-minus-circle fa-2x"></a></button>
+                </span>
+
+                <span class="btn-group pull-right col-md-1">
+                    <button type="button" class="btn btn-xs "><a href="./increaseItems/{{ this.item._id }}" class="fa fa-plus-circle fa-2x"></a></button>
+                </span>
+            </li>
+            </ul>
+        {{/each}}
     </div>
     <hr>
-
-    <div class="row" style="background-color: lightgray">
-        <div class="col-md-4">Girls Wears</div>
-        <div class="col-md-2">Blue</div>
-        <div class="col-md-2">Large</div>
-        <div class="col-md-2">5</div>
-        <div class="col-md-2">$5000</div>
+    <div class="list-group col-md-4">
+        <a href="/cart/check-out" class="list-group-item btn btn-orange" style="background-color: #9F7F8A; color:#ffffff">Proceed to check out</a>
+        <span class="list-group-item list-group-class">Total quantity :{{ this.totalQty}}</span>
+        <span class="list-group-item list-group-class"> Total price :{{ this.totalPrice }}</span>
     </div>
 
-   </div> <hr>
     <br><br>
 
-   <div class="row">
-       <div class="list-group col-md-4">
-           <a href="#" class="list-group-item" style="background-color: orangered; color: white">
-               Proceed to checkout
-           </a>
-           <a class="list-group-item"> Total price : {{ price }}</a>
-           <a class="list-group-item"> Total item (s) : {{ price }}</a>
+    {{ else }}
 
-       </div>
+    <div class="row col-md-offset-2">
+        <div class="col-6">
+            <h2> Your cart is empty </h2>
+            <a href="/" class="btn btn-sm btn-orange">Continue shopping !</a>
+        </div>
+    </div><br><br>
+
+{{/if}}
 
 
-   </div>
+
+
 
 

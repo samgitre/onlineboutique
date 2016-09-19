@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+
+    <link rel='stylesheet' href='../css/style.css' />
+    <link rel='stylesheet' href='../css/bootstrap.css' />
+    <script src="../js/bootstrap.js" rel="script"></script>
+
+    {{> scripts }}
+</head>
+<body>
+
+<div class="container">
+    {{> navbar }}
+    <!--displaying messages to the users using the connect flash module-->
+    <div class="row col-md-offset-2">
+        {{# if success_msg}}
+            <div class="row col-md-offset-1">
+                <div class="alert alert-success col-md-6"> {{ success_msg }}</div>
+            </div>
+
+        {{/if}}
+
+        {{# if error_msg}}
+            <div class="row col-md-offset-1">
+                <div class="alert alert-danger col-md-6"> {{ error_msg }}</div>
+            </div>
+        {{/if}}
+
+        {{# if error}}
+            <div class="row col-md-offset-1">
+                <div class="alert alert-danger col-md-6"> {{ error }}</div>
+            </div>
+
+        {{/if}}
+
+    </div>
+    <!--end display message to users-->
+
+
+
+            <!--injecting pages into the main template body-->
+            {{{body}}}
+
+
+</div>
+
+<!--injecting the footer as partial-->
+{{> footer }}
+</body>
+</html>

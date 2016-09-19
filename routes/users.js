@@ -3,9 +3,11 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../configs/model/user-schema');
 var auth = require('../configs/config/authentication');
+var Order = require('../configs/model/order');
+var Cart = require('../configs/model/shopping-cart');
 
 
-/* GET clients listing. */
+/* get list of users. */
 router.get('/all-clients', function(req, res) {
   res.render('users/all-clients', {title : 'Clients Information',
       layout: 'admin-layout'});
@@ -16,6 +18,7 @@ router.get('/sign-up', function(req, res, next) {
 
     res.render('users/sign-up', {title : 'Users account'});
 });
+
 
 //Creating new user account
 router.post('/createUser',  function (req, res) {
@@ -51,6 +54,7 @@ router.post('/createUser',  function (req, res) {
     res.redirect('login');
 });
 
+
 // Getting the login page
 router.get('/login', function(req, res) {
 
@@ -65,14 +69,22 @@ router.post('/loginUser', passport.authenticate('local',
         failureRedirect: 'login',
         failureFlash : true
     }), function(req, res) {
-        // console.log(user)
 
-});
+    });
 
 
 router.get('/user-profile', auth.ensureAuthentication,function (req, res) {
-
-        res.render('users/user-profile');
+    Order.find({user: req.user}, function (err, order) {
+        if(err){
+            req.flash('error_msg', 'No user data found');
+        }
+        var cart;
+        order.forEach(function (order) {
+            cart = new Cart(order.cart);
+            order.items = cart.generateArray();
+        });
+        res.render('users/user-profile', {orders : order, totalPrice: order.totalPrice});
+    });
 });
 
 

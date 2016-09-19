@@ -13,11 +13,11 @@ var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var mongooseStore = require('connect-mongo')(session);
 
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var cart = require('./routes/cart');
-var payment = require('./routes/payment');
 
 
 var app = express();
@@ -88,8 +88,6 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 app.use('/cart', cart);
-app.use('/pay', payment);
-
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -109,7 +107,6 @@ if (app.get('env') === 'development') {
 }
 
 
-
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -117,6 +114,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

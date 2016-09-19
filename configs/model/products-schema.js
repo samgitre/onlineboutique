@@ -1,33 +1,25 @@
-/**
- * Created by Samson on 8/17/2016.
- */
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var product = new Schema({
 
-    title: {
-        type : String,
+    title: { type : String,
          required : true
     },
-    category: {
-        type : String,
+    category: {type : String,
          required : true
     },
-    color: {
-        type : String,
+    color: {type : String,
          required : true
     },
-    price: {
-        type : String,
+    price: {type : String,
          required : true
     },
-    quantity: {
-        type : String,
+    quantity: {type : String,
          required : true
     },
-    productImage :{
-        type : String,
+    productImage :{type : String,
         required : true
     }
 });

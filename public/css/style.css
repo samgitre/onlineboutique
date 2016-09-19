@@ -45,7 +45,7 @@ a {
     font-family: 'Tangerine', serif;
     font-size: 48px;
     text-shadow: 6px 6px 4px #aaa;
-    text-decoration:underline;
+
 
 }
 
@@ -57,4 +57,18 @@ a {
 
 .titles{
     color:#9F7F8A;
+}
+
+.cart-items{
+    font-weight:bold;
+    font-size: 18px;
+    color: darkgray;
+}
+.clear{
+    padding-top: 20px;
+}
+
+.p-title{
+    color: #9F7F8A;
+    font-size: 18px;
 }
